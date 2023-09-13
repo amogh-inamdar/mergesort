@@ -1,0 +1,38 @@
+#include <stdio.h>
+#include <stdbool.h>
+
+#define MAX_VERTICES 100
+
+int queue[MAX_VERTICES];
+int front = -1, rear = -1;
+
+void enqueue(int vertex) {
+    if (rear == MAX_VERTICES - 1) {
+        printf("Queue is full. Cannot enqueue.\n");
+        return;
+    }
+    if (front == -1) {
+        front = 0;
+    }
+    queue[++rear] = vertex;
+}
+
+int dequeue() {
+    if (front == -1) {
+        printf("Queue is empty. Cannot dequeue.\n");
+        return -1;
+    }
+    int vertex = queue[front];
+    if (front == rear) {
+        front = rear = -1;
+    } else {
+        front++;
+    }
+    return vertex;
+}
+
+bool isEmpty() {
+    return front == -1;
+}
+
+void
