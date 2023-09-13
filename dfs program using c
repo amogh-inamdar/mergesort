@@ -1,0 +1,41 @@
+#include <stdio.h>
+#include <stdbool.h>
+
+#define MAX_VERTICES 100
+
+int stack[MAX_VERTICES];
+int top = -1;
+
+void push(int vertex) {
+    stack[++top] = vertex;
+}
+
+int pop() {
+    return stack[top--];
+}
+
+bool isEmpty() {
+    return top == -1;
+}
+
+void depthFirstSearch(int graph[MAX_VERTICES][MAX_VERTICES], int vertices, int startVertex, bool visited[]) {
+    int i, currentVertex;
+
+    push(startVertex);
+    visited[startVertex] = true;
+
+    printf("DFS traversal starting from vertex %d: ", startVertex);
+
+    while (!isEmpty()) {
+        currentVertex = pop();
+        printf("%d ", currentVertex);
+
+        for (i = 0; i < vertices; i++) {
+            if (!visited[i] && graph[currentVertex][i] == 1) {
+                push(i);
+                visited[i] = true;
+            }
+        }
+    }
+
+   
